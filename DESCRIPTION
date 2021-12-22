@@ -1,0 +1,15 @@
+Package: StatComp21090
+Type: Package
+Title: option price
+Version: 1.0
+Date: 2021-12-22
+Author: Bessie
+Maintainer: Bessie <zhoubeixi@mail.ustc.edu.cn>
+Description: function to calculate European/Amrican call/put option price by diffrence methods, and some usage examples.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.7), bootstrap, boot, RANN, Ball, energy, scatterplot3d
+LinkingTo: Rcpp
+Encoding: UTF-8
+RoxygenNote: 7.1.2
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr

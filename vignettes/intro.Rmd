@@ -1,0 +1,55 @@
+---
+title: "Introduction to StatComp21090"
+author: "Bessie"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to StatComp21090}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Overview
+
+__StatComp21090__ is a simple Construct functions to calculate European/Amrican call/put option price by diffrence method(\code{Eoption} and \code{Aoption}). 
+
+I will use _Eoption_ and _Aoption_ to varify the Option parity formula, and show that the American call option's price is equal to the European.
+
+
+## Option parity formula
+
+We just show the european option parity formula
+$$c_t+Ke^{-r(T-t)} = p_t+S_t$$
+So at the initial moment(t=0), we have
+$$c_0+Ke^{-rT}=p_0+S_t$$
+we choose T=30, sigma=0.1, S0=1, r=0.1, q=0.1, K=0.2:0.2:2
+```{r,eval=FALSE}
+a <- numeric(10)
+b <- numeric(10)
+for (i in 1:10) {
+  a[i] <- Eoption(30,0.1,1,0.1,0.1,0.2*i,"c")+0.2*i*exp(-0.1*30)
+  b[i] <- Eoption(30,0.1,1,0.1,0.1,0.2*i,"p")+1
+}
+plot(a,col="red")
+par(new = TRUE)
+plot(b,type = "l",col="blue")
+```
+
+obviously the euqality holds.
+
+## compare American call option and European call option
+
+we choose T=30, sigma=0.1, S0=1, r=0.1, q=0.1, K=0.2:2
+
+```{r,eval=FALSE}
+c <- numeric(10)
+d <- numeric(10)
+for (i in 1:10) {
+  c[i] <- Eoption(30,0.1,1,0.1,0.1,0.2*i,"c")
+  d[i] <- Aoption(30,0.1,1,0.1,0.1,0.2*i,"c")
+}
+plot(c,col="red")
+par(new = TRUE)
+plot(d,type = "l",col="green")
+```
+they are equal.
